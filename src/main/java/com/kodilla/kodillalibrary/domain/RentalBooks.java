@@ -13,8 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "rental_status")
-public class RentalStatus {
+@Entity(name = "rental_books")
+public class RentalBooks {
 
     @Id
     @NotNull

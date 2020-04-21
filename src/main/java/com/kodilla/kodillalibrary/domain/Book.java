@@ -3,29 +3,29 @@ package com.kodilla.kodillalibrary.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity(name = "book")
 public class Book {
 
+    public Book(String title, String author, int yearOfPublishment) {
+        this.title = title;
+        this.author = author;
+        this.yearOfPublishment = yearOfPublishment;
+    }
     @Id
-    @NotNull
     @Column(name = ("title"))
     private String title;
 
-    @NotNull
     @Column(name = ("author"))
     private String author;
 
-    @NotNull
     @Column(name = ("year_of_publishment"))
-    Date yearOfPublishment;
+    int yearOfPublishment;
 
     @OneToMany(
             targetEntity = ExemplarOfBook.class,
@@ -34,4 +34,6 @@ public class Book {
             fetch = FetchType.EAGER
     )
     private List<ExemplarOfBook> listOfExemplar;
+
+
 }

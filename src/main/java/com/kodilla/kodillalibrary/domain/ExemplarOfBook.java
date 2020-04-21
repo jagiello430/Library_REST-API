@@ -1,6 +1,5 @@
 package com.kodilla.kodillalibrary.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import javax.validation.constraints.NotNull;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "exemplar_of_book")
 public class ExemplarOfBook {
@@ -27,8 +25,13 @@ public class ExemplarOfBook {
     private Book book;
 
     @NotNull
-    @Column(name = ("rental_status"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = ("type_of_status"), columnDefinition = "Enum('USED', 'DESTROYED', 'LOST')")
     private TypeOfStatus typeOfStatus;
 
+    public ExemplarOfBook(Book book, TypeOfStatus typeOfStatus) {
+        this.book = book;
+        this.typeOfStatus = typeOfStatus;
+    }
 }
 

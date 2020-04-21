@@ -1,17 +1,15 @@
 package com.kodilla.kodillalibrary.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Entity(name = "reader")
@@ -32,13 +30,19 @@ public class Reader {
     private String surname;
 
     @Column(name = ("create_date"))
-    LocalDate createDate;
+    Date createDate;
 
     @OneToMany(
-            targetEntity = RentalStatus.class,
+            targetEntity = RentalBooks.class,
             mappedBy = ("reader"),
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<RentalStatus> rentalStatusList;
+    private List<RentalBooks> rentalStatusList;
+
+    public Reader(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+        this.createDate = new Date();
+    }
 }
